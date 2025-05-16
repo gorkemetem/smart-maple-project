@@ -273,79 +273,82 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
             </div>
           </div>
         )}
-        <FullCalendar
-          key={initialDate.toISOString()}
-          ref={calendarRef}
-          locale={auth.language}
-          plugins={getPlugins()}
-          contentHeight={400}
-          handleWindowResize={true}
-          selectable={true}
-          editable={true}
-          eventOverlap={true}
-          eventDurationEditable={false}
-          eventStartEditable={false} // turn off drag feature
-          initialView="dayGridMonth"
-          initialDate={initialDate}
-          events={events}
-          firstDay={1}
-          dayMaxEventRows={4}
-          fixedWeekCount={true}
-          showNonCurrentDates={true}
-          eventClick={handleEventClick}
-          eventContent={(eventInfo: any) => (
-            <RenderEventContent eventInfo={eventInfo} />
-          )}
-          datesSet={(info: any) => {
-            const prevButton = document.querySelector(
-              ".fc-prev-button"
-            ) as HTMLButtonElement;
-            const nextButton = document.querySelector(
-              ".fc-next-button"
-            ) as HTMLButtonElement;
+        <div className="calendar-panel">
+          <FullCalendar
+            key={initialDate.toISOString()}
+            ref={calendarRef}
+            locale={auth.language}
+            plugins={getPlugins()}
+            contentHeight={400}
+            handleWindowResize={true}
+            selectable={true}
+            editable={true}
+            eventOverlap={true}
+            eventDurationEditable={false}
+            eventStartEditable={false} // turn off drag feature
+            initialView="dayGridMonth"
+            initialDate={initialDate}
+            events={events}
+            firstDay={1}
+            dayMaxEventRows={4}
+            fixedWeekCount={true}
+            showNonCurrentDates={true}
+            eventClick={handleEventClick}
+            eventContent={(eventInfo: any) => (
+              <RenderEventContent eventInfo={eventInfo} />
+            )}
+            datesSet={(info: any) => {
+              const prevButton = document.querySelector(
+                ".fc-prev-button"
+              ) as HTMLButtonElement;
+              const nextButton = document.querySelector(
+                ".fc-next-button"
+              ) as HTMLButtonElement;
 
-            if (
-              calendarRef?.current?.getApi().getDate() &&
-              !dayjs(schedule?.scheduleStartDate).isSame(
-                calendarRef?.current?.getApi().getDate()
+              if (
+                calendarRef?.current?.getApi().getDate() &&
+                !dayjs(schedule?.scheduleStartDate).isSame(
+                  calendarRef?.current?.getApi().getDate()
+                )
               )
-            )
-              setInitialDate(calendarRef?.current?.getApi().getDate());
+                setInitialDate(calendarRef?.current?.getApi().getDate());
 
-            const startDiff = dayjs(info.start)
-              .utc()
-              .diff(
-                dayjs(schedule.scheduleStartDate).subtract(1, "day").utc(),
+              const startDiff = dayjs(info.start)
+                .utc()
+                .diff(
+                  dayjs(schedule.scheduleStartDate).subtract(1, "day").utc(),
+                  "days"
+                );
+              const endDiff = dayjs(dayjs(schedule.scheduleEndDate)).diff(
+                info.end,
                 "days"
               );
-            const endDiff = dayjs(dayjs(schedule.scheduleEndDate)).diff(
-              info.end,
-              "days"
-            );
-            if (startDiff < 0 && startDiff > -35) prevButton.disabled = true;
-            else prevButton.disabled = false;
+              if (startDiff < 0 && startDiff > -35) prevButton.disabled = true;
+              else prevButton.disabled = false;
 
-            if (endDiff < 0 && endDiff > -32) nextButton.disabled = true;
-            else nextButton.disabled = false;
-          }}
-          dayCellContent={({ date }) => {
-            const found = validDates().includes(
-              dayjs(date).format("YYYY-MM-DD")
-            );
-            const isHighlighted = highlightedDates.includes(
-              dayjs(date).format("DD-MM-YYYY")
-            );
+              if (endDiff < 0 && endDiff > -32) nextButton.disabled = true;
+              else nextButton.disabled = false;
+            }}
+            dayCellContent={({ date }) => {
+              const found = validDates().includes(
+                dayjs(date).format("YYYY-MM-DD")
+              );
+              const isHighlighted = highlightedDates.includes(
+                dayjs(date).format("DD-MM-YYYY")
+              );
 
-            return (
-              <div
-                className={`${found ? "" : "date-range-disabled"} ${isHighlighted ? "highlightedPair" : ""
-                  }`}
-              >
-                {dayjs(date).date()}
-              </div>
-            );
-          }}
-        />
+              return (
+                <div
+                  className={`${found ? "" : "date-range-disabled"} ${isHighlighted ? "highlightedPair" : ""
+                    }`}
+                >
+                  {dayjs(date).date()}
+                </div>
+              );
+            }}
+          />
+        </div>
+
       </div>
     </div>
   );
