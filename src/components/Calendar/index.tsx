@@ -336,8 +336,8 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
 
             return (
               <div
-                className={`${found ? "" : "date-range-disabled"} ${isHighlighted ? "highlighted-date-orange" : ""
-                  } highlightedPair`}
+                className={`${found ? "" : "date-range-disabled"} ${isHighlighted ? "highlightedPair" : ""
+                  }`}
               >
                 {dayjs(date).date()}
               </div>
