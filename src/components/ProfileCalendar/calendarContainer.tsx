@@ -323,10 +323,10 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
                 info.end,
                 "days"
               );
-              if (startDiff < 0 && startDiff > -35) prevButton.disabled = true;
+              if (startDiff < 0 && startDiff > -29) { prevButton.disabled = true; nextButton.disabled = false; }
               else prevButton.disabled = false;
 
-              if (endDiff < 0 && endDiff > -32) nextButton.disabled = true;
+              if (endDiff < 0 && endDiff > -32) { nextButton.disabled = true; prevButton.disabled = false; }
               else nextButton.disabled = false;
             }}
             dayCellContent={({ date }) => {
