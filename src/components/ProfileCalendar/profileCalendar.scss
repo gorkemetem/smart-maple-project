@@ -9,11 +9,41 @@
 .profile-section {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  gap: 24px;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  color: #2c3e50;
+
+  h2 {
+    font-size: 1.75rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  p {
+    margin: 2px 0;
+    font-size: 1rem;
+    color: #555;
+
+    &:last-of-type {
+      font-style: italic;
+      color: #888;
+    }
+  }
 }
 
 .modal-overlay {
@@ -34,10 +64,6 @@
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;
-}
-
-.profile-info h2 {
-  margin: 0 0 8px;
 }
 
 .calendar-section {
