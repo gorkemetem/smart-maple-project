@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { EVENT_LABELS } from "../../constants/labels";
 
 dayjs.extend(utc);
 dayjs.extend(isSameOrBefore);
@@ -83,7 +84,12 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
     dayjs(schedule?.scheduleStartDate).toDate()
   );
 
-  const [selectedEvent, setSelectedEvent] = useState<EventInput | null>(null);
+  type SelectedEventType = EventInput & {
+  id: string;
+  startStr: string;
+};
+
+  const [selectedEvent, setSelectedEvent] = useState<SelectedEventType | null>(null);
   const [showModal, setShowModal] = useState(false);
 
   //event module control
@@ -206,7 +212,7 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
     )?.offDays;
     //to show only the pairlist of the selected staff
     let highlightedDates: string[] = [];
-    let staff = getStaffById(selectedStaffId);
+    let staff = selectedStaffId !== null ? getStaffById(selectedStaffId) : null;
 
     staff?.pairList?.forEach((item) => {
       const dateRange = getDatesBetween(item.startDate, item.endDate);
@@ -261,14 +267,14 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
         {showModal && selectedEvent && (
           <div className="modal-overlay" onClick={() => setShowModal(false)}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <h3>Etkinlik Detayı</h3>
-              <p><strong>Personel Adı:</strong> {getStaffByAssignmentId(selectedEvent?.id)?.name}</p>
-              <p><strong>Vardiya Adı:</strong> {getShiftNameByAssignmentId(selectedEvent?.id)}</p>
-              <p><strong>Tarih:</strong> {selectedEvent.startStr}</p>
-              <p><strong>Başlangıç Saati:</strong> {getStartHourByAssignmentId(selectedEvent?.id)}</p>
-              <p><strong>Bitiş Saati:</strong> {getEndHourByAssignmentId(selectedEvent?.id)}</p>
+              <h3>{EVENT_LABELS.title}</h3>
+              <p><strong>{EVENT_LABELS.staffName}:</strong> {getStaffByAssignmentId(selectedEvent?.id)?.name}</p>
+              <p><strong>{EVENT_LABELS.shiftName}:</strong> {getShiftNameByAssignmentId(selectedEvent?.id)}</p>
+              <p><strong>{EVENT_LABELS.date}:</strong> {selectedEvent?.startStr}</p>
+              <p><strong>{EVENT_LABELS.startTime}:</strong> {getStartHourByAssignmentId(selectedEvent?.id)}</p>
+              <p><strong>{EVENT_LABELS.endTime}:</strong> {getEndHourByAssignmentId(selectedEvent?.id)}</p>
               <div className="button-wrapper">
-                <button onClick={() => setShowModal(false)}>Kapat</button>
+                <button onClick={() => setShowModal(false)}>{EVENT_LABELS.close}</button>
               </div>
             </div>
           </div>
