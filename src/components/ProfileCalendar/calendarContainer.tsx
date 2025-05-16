@@ -194,8 +194,8 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
         staffId: schedule?.assignments?.[i]?.staffId,
         shiftId: schedule?.assignments?.[i]?.shiftId,
         className: `event ${classes[className]} ${getAssigmentById(schedule?.assignments?.[i]?.id)?.isUpdated
-            ? "highlight"
-            : ""
+          ? "highlight"
+          : ""
           } ${!isValidDate ? "invalid-date" : ""}`,
       };
       works.push(work);
@@ -267,7 +267,9 @@ const CalendarContainer = ({ schedule, auth }: CalendarContainerProps) => {
               <p><strong>Tarih:</strong> {selectedEvent.startStr}</p>
               <p><strong>Başlangıç Saati:</strong> {getStartHourByAssignmentId(selectedEvent?.id)}</p>
               <p><strong>Bitiş Saati:</strong> {getEndHourByAssignmentId(selectedEvent?.id)}</p>
-              <button onClick={() => setShowModal(false)}>Kapat</button>
+              <div className="button-wrapper">
+                <button onClick={() => setShowModal(false)}>Kapat</button>
+              </div>
             </div>
           </div>
         )}

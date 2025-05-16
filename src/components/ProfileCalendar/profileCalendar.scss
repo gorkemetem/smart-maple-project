@@ -50,6 +50,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -60,22 +62,69 @@
 }
 
 .modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 300px;
+  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 300px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    color: #222;
+  }
+
+  p {
+    margin: 6px 0;
+    font-size: 0.95rem;
+    color: #444;
+
+    strong {
+      color: #111;
+    }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  button {
+    margin-top: 20px;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #1d4ed8;
+    }
+  }
 }
 
 .calendar-section {
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  /* height: 100%; */
+  padding: 24px;
+  background-color: #f8f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
 }
 
 .calendar-wrapper {
-  min-height: 400px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .staff-calendar-container {
@@ -439,42 +488,67 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
 
   .staff {
-    min-height: 32px;
-    padding: 0 12px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    background: #ffffff;
-    color: #19979c;
-    border: 1px solid #19979c;
+    gap: 8px;
+    background-color: #ffffff;
+    padding: 10px 16px;
     border-radius: 8px;
-    text-transform: capitalize;
-    transition: all 0.3s;
     cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
 
-    svg path {
-      fill: #19979c;
-      transition: all 0.3s;
+    svg {
+      fill: #777;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    &:hover {
+      background-color: #f0f4ff;
+      border-color: #3b82f6;
     }
 
     &.active {
-      background: #19979c;
-      color: #ffffff;
+      background-color: #e0ecff;
+      border-color: #2563eb;
 
-      svg path {
-        fill: #ffffff;
+      svg {
+        fill: #2563eb;
+      }
+
+      span {
+        color: #1e3a8a;
+        font-weight: 600;
       }
     }
-
-    p {
-      color: inherit;
-    }
   }
+}
+
+.date-range-disabled {
+  color: #ccc;
+  text-decoration: line-through;
 }
 
 .highlightedPair {
   content: "";
   border-bottom: 5px solid rgba(194, 6, 138, 0.5) !important;
+  background-color: #fffae6;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #d97706;
+  margin: 0 auto;
 }
