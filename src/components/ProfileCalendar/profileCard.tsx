@@ -1,6 +1,6 @@
 import type { UserInstance } from "../../models/user";
 import AuthSession from "../../utils/session";
-import "../profileCalendar.scss";
+import "./profileCalendar.scss";
 
 type ProfileCardProps = {
     profile: UserInstance;

@@ -14,7 +14,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 
 import type { EventInput } from "@fullcalendar/core/index.js";
 
-import "../profileCalendar.scss";
+import "./profileCalendar.scss";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";

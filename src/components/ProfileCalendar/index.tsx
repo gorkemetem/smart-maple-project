@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import ProfileCard from "../Profile";
-import CalendarContainer from "../Calendar";
+import ProfileCard from "./profileCard";
+import CalendarContainer from "./calendarContainer";
 
 import { useSelector } from "react-redux";
 import { getAuthUser } from "../../store/auth/selector";
@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { fetchSchedule } from "../../store/schedule/actions";
 import { setProfile } from "../../store/auth/actions";
 
-import "../profileCalendar.scss";
+import "./profileCalendar.scss";
 
 const ProfileCalendar = () => {
   const dispatch = useDispatch();
